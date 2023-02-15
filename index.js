@@ -1,23 +1,14 @@
 const express= require ("express");
-const cors=require("cors");
+const cors=require('cors');
 const dbConnect=require ("./db/config");
 const User=require('./db/user');
 const Product=require('./db/product');
 const jwt=require("jsonwebtoken");
 const app=express();
-app.use(express.json());
-app.use(cors());
 dbConnect();
 const jwtKey=process.env.jwt_Key;
-
-
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header("Access-Control-Allow-Credentials", "true");
-    res.header("Access-Control-Allow-Headers", "content-type");
-    res.header( "Access-Control-Allow-Methods", "PUT, POST, GET, DELETE, PATCH, OPTIONS");
-    next();
-  });
+app.use(express.json());
+app.use(cors());
 
 
 // Middleware to verify token in every api after login or sign up
