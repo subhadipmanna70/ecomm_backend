@@ -103,7 +103,7 @@ app.post("/add-product",verifyToken,async(req,resp)=>{
 // show products list api
 
 app.get("/products",verifyToken ,async(req,resp)=>{
-    let products= await Product.find();
+    let products= await Product.find({userId:req.headers['user_id']});
     if(products.length>0){
         resp.send(products);
     }
